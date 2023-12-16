@@ -1,0 +1,52 @@
+Login Page
+- Username Field: For the user to enter their username.
+    Requirements
+    Check for existing
+- Password Field: For the user to enter their password.
+    Requirements
+- Login Button: To submit the credentials.
+- Error Message Display: To show any login errors.
+
+Main Dashboard
+- Navigation Bar: With links to different sections (Movies, TV Shows, Music, etc.).
+- User Greeting: Display the user's name and a logout button.
+- Media List: A table or grid view showing the media with columns for name, status, type, and actions.
+- Add Media Button: To open a form to add new media items.
+- Sort Options: To sort the list by media type or status.
+
+Add/Edit Media Form (Modal or Separate Page)
+- Media Name Field: To enter the name of the media.
+- Media Type Dropdown: To select the type (Movie, TV Show, Music).
+- Status Dropdown: To select the status (e.g., "Awaiting Download", "Downloaded", "Bad Quality").
+- Save Button: To save the new media item or changes.
+- Cancel Button: To close the form without saving.
+
+Database Structure
+CREATE TABLE Users (
+    UserID INT AUTO_INCREMENT PRIMARY KEY,
+    Username VARCHAR(255) UNIQUE NOT NULL,
+    PasswordHash VARCHAR(255) NOT NULL,
+    Email VARCHAR(255) UNIQUE NOT NULL,
+    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE Media (
+    MediaID INT AUTO_INCREMENT PRIMARY KEY,
+    UserID INT NOT NULL,
+    Title VARCHAR(255) NOT NULL,
+    MediaType VARCHAR(50) NOT NULL,
+    Status VARCHAR(50) NOT NULL,
+    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UpdatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (UserID) REFERENCES Users(UserID)
+);
+
+Dependencies:
+- cors
+- express
+- axios
+- dotenv
+- express-session
+- bcrypt
+- path
+- sequelize
