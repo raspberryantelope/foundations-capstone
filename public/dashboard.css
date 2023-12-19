@@ -1,24 +1,24 @@
 @font-face {
     font-family: "Hey Gorgeous";
-    src: url("./webfontkit-20231215-184608/heygorgeous-webfont.woff") format("woff");
+    src: url("fonts/heygorgeous-webfont.woff") format("woff");
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
     font-family: "Altima";
-    src: url("./webfontkit-20231215-184608/altima-webfont.woff") format("woff");
+    src: url("fonts/altima-webfont.woff") format("woff");
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
     font-family: "Bree Serif";
-    src: url("./webfontkit-20231215-184608/breeserif-regular-webfont.woff") format("woff");
+    src: url("fonts/breeserif-regular-webfont.woff") format("woff");
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
     font-family: "Reactor7";
-    src: url("./webfontkit-20231215-184608/reactor7-webfont.woff") format("woff");
+    src: url("fonts/reactor7-webfont.woff") format("woff");
     font-weight: normal;
     font-style: normal;
 }
@@ -47,7 +47,7 @@ header img#homeButton:hover {
 }
 
 header h2 {
-font-size: 3.25rem;
+    font-size: 3.25rem;
 }
 
 nav ul {
@@ -73,44 +73,4 @@ nav a.header-button {
 
 nav a.header-button:hover {
     background-color: #777;
-}
-
-body {
-    margin: 0;
-    padding: 0;
-}
-
-#landing-container {
-    text-align: center;
-    padding: 50px;
-}
-
-#landing-container h1 {
-    font-family: "Hey Gorgeous";
-    font-size: 4rem;
-    margin-top: 125px;
-    margin-bottom: 20px;
-}
-
-#landing-buttons {
-    display: flex;
-    justify-content: center;
-    margin-top: 25px;
-
-}
-
-#landing-buttons button {
-    color: #ffead4;
-    background-color: #333;
-    margin: 0 50px;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 2rem;
-    font-family: "Bree Serif";
-    cursor: pointer;
-    transition: background-color .5s;
-}
-
-#landing-buttons button:hover {
-    background-color: #111;
 }

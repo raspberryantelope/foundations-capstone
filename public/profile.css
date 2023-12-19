@@ -1,0 +1,76 @@
+@font-face {
+    font-family: "Hey Gorgeous";
+    src: url("fonts/heygorgeous-webfont.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Altima";
+    src: url("fonts/altima-webfont.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Bree Serif";
+    src: url("fonts/breeserif-regular-webfont.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Reactor7";
+    src: url("fonts/reactor7-webfont.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+header {
+    background-color: #333;
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    justify-content: space-between;
+    height: 12vh;
+}
+
+header img#homeButton {
+    cursor: pointer;
+    object-fit: contain;
+    position: relative;
+    max-width: 100%;
+    max-height: 10vh;
+    height: auto;
+    transition: opacity 0.3s;
+}
+
+header img#homeButton:hover {
+    opacity: .7;
+}
+
+header h2 {
+    font-size: 3.25rem;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    font-size: 1.5rem;
+}
+
+nav li {
+    padding: 0 10px;
+}
+
+nav a.header-button {
+    text-decoration: none;
+    color: white;
+    background-color: #555;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+nav a.header-button:hover {
+    background-color: #777;
+}

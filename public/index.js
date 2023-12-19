@@ -10,6 +10,7 @@ logButtonCheck()
 document.getElementById("landing-login-button").addEventListener("click", (event) => {
     window.location.href = "login.html"
 })
-document.getElementById("landing-register-button").addEventListener("click", (event) => {
-    window.location.href = "login.html"
+document.getElementById("landing-dashboard-button").addEventListener("click", (event) => {
+    window.location.href = "dashboard.html"
 })
+

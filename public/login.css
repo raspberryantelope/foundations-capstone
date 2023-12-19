@@ -1,24 +1,24 @@
 @font-face {
     font-family: "Hey Gorgeous";
-    src: url("./webfontkit-20231215-184608/heygorgeous-webfont.woff") format("woff");
+    src: url("fonts/heygorgeous-webfont.woff") format("woff");
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
     font-family: "Altima";
-    src: url("./webfontkit-20231215-184608/altima-webfont.woff") format("woff");
+    src: url("fonts/altima-webfont.woff") format("woff");
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
     font-family: "Bree Serif";
-    src: url("./webfontkit-20231215-184608/breeserif-regular-webfont.woff") format("woff");
+    src: url("fonts/breeserif-regular-webfont.woff") format("woff");
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
     font-family: "Reactor7";
-    src: url("./webfontkit-20231215-184608/reactor7-webfont.woff") format("woff");
+    src: url("fonts/reactor7-webfont.woff") format("woff");
     font-weight: normal;
     font-style: normal;
 }
@@ -145,7 +145,6 @@ body {
 }
 
 #login-form button {
-    font-size: 1.5rem;
     padding: 10px 20px;
     margin-bottom: 5px;
     background-color: #555;
@@ -213,7 +212,6 @@ body {
 }
 
 #register-form button {
-    font-size: 1.5rem;
     padding: 10px 20px;
     background-color: #555;
     color: white;
@@ -260,4 +258,68 @@ body {
 #login-error-message.error-visible, #register-error-message.error-visible {
     opacity: 1 ;
     visibility: visible ;
+}
+
+#register-form input.input-invalid {
+    border : 2px solid #d71111;
+}
+
+#register-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.input-group {
+    position: relative;
+}
+
+.requirements-message {
+    display: none;
+    position: absolute;
+    background: #f1f1f1;
+    color: #000;
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 10;
+    top: 100%;
+    left: 0;
+}
+
+.input-group input:focus + .requirements-message {
+    display: block;
+}
+
+#message {
+    display:none;
+    background: #f1f1f1;
+    color: #000;
+    position: relative;
+    padding: 20px;
+    margin-top: 10px;
+}
+
+
+#message p {
+    padding: 10px 35px;
+    font-size: 18px;
+}
+
+.valid {
+    color: green;
+}
+
+.valid:before {
+    position: relative;
+    left: -3%;
+    content: "✔";
+}
+
+.invalid {
+    color: red;
+}
+
+.invalid:before {
+    position: relative;
+    left: -3%;
+    content: "𝕏";
 }
