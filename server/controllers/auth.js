@@ -59,7 +59,7 @@ module.exports = {
                 passwordHash
             }
             //placeholder for actual DB logic
-            users.push(newUser);
+            users.push(newUser)
 
             let returnUser = {...newUser}
             delete returnUser.passwordHash

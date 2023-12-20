@@ -23,13 +23,14 @@
     font-style: normal;
 }
 header {
-    background-color: #333;
+    background-color: #492837;
     color: white;
     display: flex;
     align-items: center;
     padding: 0 20px;
     justify-content: space-between;
     height: 12vh;
+    overflow: clip;
 }
 
 header img#homeButton {
@@ -37,7 +38,7 @@ header img#homeButton {
     object-fit: contain;
     position: relative;
     max-width: 100%;
-    max-height: 10vh;
+    max-height: 13vh;
     height: auto;
     transition: opacity 0.3s;
 }
@@ -48,6 +49,7 @@ header img#homeButton:hover {
 
 header h2 {
 font-size: 3.25rem;
+-webkit-text-stroke: .80px black;
 }
 
 nav ul {
@@ -64,20 +66,29 @@ nav li {
 
 nav a.header-button {
     text-decoration: none;
-    color: white;
-    background-color: #555;
-    padding: 10px 15px;
-    border-radius: 5px;
+    color: #ffead4;
+    background-color: #2f2542;
+    padding: 20px 25px;
+    border-radius: 8px;
     transition: background-color 0.3s;
+    font-size: 2.45rem;
 }
 
 nav a.header-button:hover {
-    background-color: #777;
+    background-color: #413a70;
 }
 
 body {
     margin: 0;
     padding: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-image: url(./logo.new.old.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: auto 100%;
+    background-color: #322e3b;
 }
 
 #landing-container {
@@ -87,30 +98,40 @@ body {
 
 #landing-container h1 {
     font-family: "Hey Gorgeous";
-    font-size: 4rem;
-    margin-top: 125px;
-    margin-bottom: 20px;
+    color: #fff;
+    font-size: 3.6rem;
+    margin-top: 9%;
+    margin-bottom: 8%;
+    -webkit-text-stroke: 3px black;
+    line-height: 2.5;
+}
+
+#landing-container img {
+    /*margin: 0 auto;*/
+    max-width: 10%;
+    height: auto;
 }
 
 #landing-buttons {
     display: flex;
     justify-content: center;
-    margin-top: 25px;
+    margin-top: 10%;
+    gap: 10%;
 
 }
 
 #landing-buttons button {
     color: #ffead4;
-    background-color: #333;
+    background-color: #5d2033;
     margin: 0 50px;
     padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 2rem;
+    border-radius: 10px;
+    font-size: 3rem;
     font-family: "Bree Serif";
     cursor: pointer;
     transition: background-color .5s;
 }
 
 #landing-buttons button:hover {
-    background-color: #111;
+    background-color: #9d2a4e;
 }

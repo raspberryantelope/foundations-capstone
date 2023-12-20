@@ -7,8 +7,8 @@
     </head>
     <body>
         <header>
-            <a href="index.html"><img src="./logo.png" alt="Media Tracker Logo" id="homeButton"></a>
-            <h2>Media Tracker</h2>
+            <a href="index.html"><img src="./logo.test.new.new.png" alt="Media Tracker Logo" id="homeButton"></a>
+            <h2>Lone Peak Media Tracker</h2>
             <nav>
                 <ul>
                     <li><a href="dashboard.html" class="header-button">Dashboard</a></li>
@@ -18,8 +18,10 @@
             </nav>
         </header>
         <div id = "action-container">
-            <div></div>
             <div id = "login-container">
+                <div id = "welcome-container">
+                    <h1 id = "welcome-message">Welcome<br>Back!</h1>
+                </div>
                 <h1>Login</h1>
                 <form id = "login-form">
                     <label for = "login-username">Username</label>
@@ -37,9 +39,9 @@
                     <div class="input-group">
                         <label for="register-username">Username</label>
                         <input type="text" id="register-username" name="username" placeholder="Username">
-                        <div class="requirements-message" id="username-requirements-message">
+                        <div class="requirements-message-username" id="username-requirements-message">
                             <h3>Username must follow these guidelines:</h3>
-                            <p id="username-requirements-length" class="invalid">At least <b>3 characters</b> in length</p>
+                            <p id="username-requirements-length" class="invalid">At least <b>3 characters</b> <br>in length</p>
                             <p id="username-requirements-runon" class="invalid">No more than <b>64 characters</b> in length</p>
                             <p id="username-requirements-special" class="invalid">Does <b>not</b> contain spaces or any special characters</p>
                         </div>
@@ -47,7 +49,7 @@
                     <div class="input-group">
                         <label for="register-password">Password</label>
                         <input type="password" id="register-password" name="password" placeholder="Password">
-                        <div class="requirements-message" id="password-requirements-message">
+                        <div class="requirements-message-password" id="password-requirements-message">
                             <h3>Password must contain:</h3>
                             <p id="password-requirements-lower-letter" class="invalid">At least one <b>lowercase</b> letter</p>
                             <p id="password-requirements-capital" class="invalid">At least one <b>uppercase</b> letter</p>
@@ -57,7 +59,7 @@
                         </div>
                     </div>
                     <div class="input-group">
-                        <label for="register-email">Email</label>
+                        <label for="register-email">Email Address</label>
                         <input type="email" id="register-email" name="email" placeholder="Email">
                     </div>
                     <div class="input-group">
@@ -68,7 +70,6 @@
                     <button type="submit" id="register-button">Register</button>
                 </form>
             </div>
-            <div></div>
         </div>
         <script src="../node_modules/axios/dist/axios.min.js"></script>
         <script src="login.js"></script>

@@ -8,10 +8,11 @@ const app = express()
 const authController = require("./controllers/auth")
 const PORT = process.env.SERVER_PORT
 const SECRET = process.env.SESSION_SECRET
+
 app.use(cors())
 app.use(bodyParser.json())
 app.use(express.static(`${__dirname}/public`))
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use(session({
     secret: SECRET,
@@ -34,6 +35,7 @@ app.get("*", (request, response) => {
     }
 })
 app.listen(PORT, () => console.log("Server running on port 4000"))
+
 /*
 // Set up EJS as the view engine. We'll use this to serve pages from the views/ directory.
 // For example, res.render("index") will render views/index.ejs.

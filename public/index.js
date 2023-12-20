@@ -1,12 +1,5 @@
-function logButtonCheck() {
-    let loggedIn = true
-    if (loggedIn) {
-        document.getElementById("log-button").innerHTML = "Logout"
-    } else {
-        document.getElementById("log-button").innerHTML = "Login"
-    }
-}
-logButtonCheck()
+let audio = document.getElementById("landing-audio")
+audio.volume = 0.01
 document.getElementById("landing-login-button").addEventListener("click", (event) => {
     window.location.href = "login.html"
 })

@@ -9,7 +9,7 @@ function disableRegister() {
     document.getElementById("register-button").disabled = document.getElementById("register-username").value === "" ||
         document.getElementById("register-email").value === "" ||
         document.getElementById("register-password").value === "" ||
-        document.getElementById("register-confirm-password").value === "";
+        document.getElementById("register-confirm-password").value === ""
 }
 disableRegister()
 
@@ -18,32 +18,32 @@ let registerUsernameMinLength = document.getElementById("username-requirements-l
 let registerUsernameMaxLength = document.getElementById("username-requirements-runon")
 let registerUsernameSpecial = document.getElementById("username-requirements-special")
 registerUsername.onfocus = function () {
-    document.getElementById("username-requirements-message").style.display = "block";
+    document.getElementById("username-requirements-message").style.display = "block"
 }
 registerUsername.onblur = function () {
-    document.getElementById("username-requirements-message").style.display = "none";
+    document.getElementById("username-requirements-message").style.display = "none"
 }
 registerUsername.onkeyup = function () {
     if (registerUsername.value.length < 3) {
-        registerUsernameMinLength.classList.remove("valid");
-        registerUsernameMinLength.classList.add("invalid");
+        registerUsernameMinLength.classList.remove("valid")
+        registerUsernameMinLength.classList.add("invalid")
     } else {
-        registerUsernameMinLength.classList.remove("invalid");
-        registerUsernameMinLength.classList.add("valid");
+        registerUsernameMinLength.classList.remove("invalid")
+        registerUsernameMinLength.classList.add("valid")
     }
     if (registerUsername.value.length > 64) {
-        registerUsernameMaxLength.classList.remove("valid");
-        registerUsernameMaxLength.classList.add("invalid");
+        registerUsernameMaxLength.classList.remove("valid")
+        registerUsernameMaxLength.classList.add("invalid")
     } else {
-        registerUsernameMaxLength.classList.remove("invalid");
-        registerUsernameMaxLength.classList.add("valid");
+        registerUsernameMaxLength.classList.remove("invalid")
+        registerUsernameMaxLength.classList.add("valid")
     }
-    if (/[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(registerUsername.value)) {
-        registerUsernameSpecial.classList.remove("valid");
-        registerUsernameSpecial.classList.add("invalid");
+    if (/[`!@#$%^&*()+\-=\[\]{};':"\\|,.<>\/?~]/.test(registerUsername.value)) {
+        registerUsernameSpecial.classList.remove("valid")
+        registerUsernameSpecial.classList.add("invalid")
     } else {
-        registerUsernameSpecial.classList.remove("invalid");
-        registerUsernameSpecial.classList.add("valid");
+        registerUsernameSpecial.classList.remove("invalid")
+        registerUsernameSpecial.classList.add("valid")
     }
 }
 
@@ -56,63 +56,64 @@ let registerPasswordSpecial = document.getElementById("password-requirements-spe
 let registerPasswordLength = document.getElementById("password-requirements-length")
 registerPassword.onkeyup = function () {
     if (/[a-z]/.test(registerPassword.value)) {
-        registerPasswordLowerLetter.classList.remove("invalid");
-        registerPasswordLowerLetter.classList.add("valid");
+        registerPasswordLowerLetter.classList.remove("invalid")
+        registerPasswordLowerLetter.classList.add("valid")
     } else {
-        registerPasswordLowerLetter.classList.remove("valid");
-        registerPasswordLowerLetter.classList.add("invalid");
+        registerPasswordLowerLetter.classList.remove("valid")
+        registerPasswordLowerLetter.classList.add("invalid")
     }
     if (/[A-Z]/.test(registerPassword.value)) {
-        registerPasswordUpperLetter.classList.remove("invalid");
-        registerPasswordUpperLetter.classList.add("valid");
+        registerPasswordUpperLetter.classList.remove("invalid")
+        registerPasswordUpperLetter.classList.add("valid")
     } else {
-        registerPasswordUpperLetter.classList.remove("valid");
-        registerPasswordUpperLetter.classList.add("invalid");
+        registerPasswordUpperLetter.classList.remove("valid")
+        registerPasswordUpperLetter.classList.add("invalid")
     }
     if (/[0-9]/.test(registerPassword.value)) {
-        registerPasswordNumber.classList.remove("invalid");
-        registerPasswordNumber.classList.add("valid");
+        registerPasswordNumber.classList.remove("invalid")
+        registerPasswordNumber.classList.add("valid")
     } else {
-        registerPasswordNumber.classList.remove("valid");
-        registerPasswordNumber.classList.add("invalid");
+        registerPasswordNumber.classList.remove("valid")
+        registerPasswordNumber.classList.add("invalid")
 }
     if (/[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(registerPassword.value)) {
-        registerPasswordSpecial.classList.remove("invalid");
-        registerPasswordSpecial.classList.add("valid");
+        registerPasswordSpecial.classList.remove("invalid")
+        registerPasswordSpecial.classList.add("valid")
     } else {
-        registerPasswordSpecial.classList.remove("valid");
-        registerPasswordSpecial.classList.add("invalid");
+        registerPasswordSpecial.classList.remove("valid")
+        registerPasswordSpecial.classList.add("invalid")
     }
     if (registerPassword.value.length < 8) {
-        registerPasswordLength.classList.remove("valid");
-        registerPasswordLength.classList.add("invalid");
+        registerPasswordLength.classList.remove("valid")
+        registerPasswordLength.classList.add("invalid")
     } else {
-        registerPasswordLength.classList.remove("invalid");
-        registerPasswordLength.classList.add("valid");
+        registerPasswordLength.classList.remove("invalid")
+        registerPasswordLength.classList.add("valid")
     }
 }
 
 
 document.getElementById("login-button").addEventListener("click", (event) => {
-    event.preventDefault();
-    const errorMessage = document.getElementById("login-error-message");
-    const username = document.getElementById("login-username").value;
-    const password = document.getElementById("login-password").value;
-    axios.post("http://localhost:4000/api/login", { username, password })
-    .then(response => {
-        window.location.href = "/dashboard"
-    })
-    .catch(error => {
-        console.log(error)
-        errorMessage.textContent = "Login failed. Please check your username and password and try again."
-        errorMessage.classList.add("error-visible")
-        document.getElementById("login-password").value = ""
-    })
+    event.preventDefault()
+    const errorMessage = document.getElementById("login-error-message")
+    const username = document.getElementById("login-username").value
+    const password = document.getElementById("login-password").value
+    axios
+        .post("http://localhost:4000/api/login", { username, password })
+        .then(response => {
+            window.location.href = "/dashboard"
+        })
+        .catch(error => {
+            console.log(error)
+            errorMessage.textContent = "Login failed. Please check your username and password and try again."
+            errorMessage.classList.add("error-visible")
+            document.getElementById("login-password").value = ""
+        })
 })
 
 
 document.getElementById("register-button").addEventListener("click", (event) => {
-    event.preventDefault();
+    event.preventDefault()
     const errorMessage = document.getElementById("register-error-message")
     const username = document.getElementById("register-username").value
     const email = document.getElementById("register-email").value
@@ -158,16 +159,3 @@ document.querySelectorAll("#login-form input, #register-form input").forEach(inp
     })
 })
 
-
-/*
-function disableRegister() {
-    if (document.getElementById("register-username").value === "" ||
-        document.getElementById("register-email").value === "" ||
-        document.getElementById("register-password").value === "" ||
-        document.getElementById("register-confirm-password").value === "") {
-        document.getElementById("register-button").disabled = true
-    }
-    else {
-        document.getElementById("register-button").disabled = false
-    }
-}*/
