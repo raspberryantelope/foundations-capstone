@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Media</title>
+        <link rel="stylesheet" href="../public/media.css">
+    </head>
+    <body>
+        <header>
+            <a href="../public/index.html"><img src="../public/logo.test.new.new.png" alt="Media Tracker Logo" id="homeButton"></a>
+            <h2>Media Tracker</h2>
+            <nav>
+                <ul>
+                    <li><a href="dashboard.html" class="header-button">Dashboard</a></li>
+                    <li><a href="profile.html" class="header-button">Profile</a></li>
+                    <li><a href="media.html" class="header-button">Media</a></li>
+                    <li><a href="logout.html" class="header-button" id="log-button"></a></li>
+                </ul>
+            </nav>
+        </header>
+        <div id="media-container">
+            <div id="movie-container">
+                <h1>Movies</h1>
+                <div id="movies-list"></div>
+            </div>
+            <div id="show-container">
+                <h1>TV Shows</h1>
+                <div id="shows-list"></div>
+            </div>
+            <div id="music-container">
+                <h1>Music</h1>
+                <div id="music-list"></div>
+            </div>
+            <div id="book-container">
+                <h1>Books</h1>
+                <div id="books-list"></div>
+            </div>
+            <div id="audiobook-container">
+                <h1>Audiobooks</h1>
+                <div id="audiobooks-list"></div>
+            </div>
+        </div>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="../public/media.js"></script>
+    </body>
+</html>

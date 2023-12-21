@@ -21,7 +21,7 @@ Add/Edit Media Form (Modal or Separate Page)
 - Save Button: To save the new media item or changes.
 - Cancel Button: To close the form without saving.
 
-Database Structure
+Planned Database Structure (now deprecated)
 CREATE TABLE Users (
     UserID INT AUTO_INCREMENT PRIMARY KEY,
     Username VARCHAR(255) UNIQUE NOT NULL,

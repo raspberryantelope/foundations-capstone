@@ -3,7 +3,6 @@ function borderInvalid(fieldId) {
     if (field) {
         field.classList.add("input-invalid")
     }
-    console.log (`Invalid ${fieldId}`)
 }
 function disableRegister() {
     document.getElementById("register-button").disabled = document.getElementById("register-username").value === "" ||
@@ -101,7 +100,7 @@ document.getElementById("login-button").addEventListener("click", (event) => {
     axios
         .post("http://localhost:4000/api/login", { username, password })
         .then(response => {
-            window.location.href = "/dashboard"
+            window.location.href = "/dashboard.html"
         })
         .catch(error => {
             console.log(error)
@@ -122,7 +121,7 @@ document.getElementById("register-button").addEventListener("click", (event) => 
 
     axios.post("http://localhost:4000/api/register", { username, email, password, confirmPassword })
     .then(response => {
-        /*window.location.href = "/login"*/
+        window.location.href = "/login.html"
     })
     .catch(error => {
         errorMessage.textContent = error.response && error.response.data
