@@ -74,7 +74,14 @@ module.exports = {
             delete returnUser.passwordHash;
             response.status(201).send(returnUser);
         } catch (error) {
-            response.status(500).send("An error occurred during registration: " + error.message);
+            console.error("Stack", error.stack)
+            if (error.name === "SequelizeValidationError") {
+                console.log("Validation errors:", error.errors)
+                const messages = error.errors.map(error => error.message)
+                response.status(400).send(`Validation errors: ${messages.join(", ")}`)
+            } else {
+                response.status(500).send("An error occurred during registration: " + error)
+            }
         }
     }
 }

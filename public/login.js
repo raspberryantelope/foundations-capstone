@@ -100,7 +100,7 @@ document.getElementById("login-button").addEventListener("click", (event) => {
     axios
         .post("http://localhost:4000/api/login", { username, password })
         .then(response => {
-            window.location.href = "/dashboard.html"
+            window.location.href = "/dashboard"
         })
         .catch(error => {
             console.log(error)

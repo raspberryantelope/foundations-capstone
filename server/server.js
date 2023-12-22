@@ -31,6 +31,10 @@ const restrict = (request, response, next) => {
     }
 }
 
+app.get("/login", (request, response) => {
+    response.sendFile(path.join(__dirname, '../public', 'login.html'))
+})
+
 app.post("/api/login", authController.login)
 app.post("/api/register", authController.register)
 
@@ -39,7 +43,7 @@ app.get("/logout", (request, response) => {
         if (error) {
             response.status(500).send("Something went wrong")
         } else {
-            response.redirect("/login.html")
+            response.redirect("/login")
         }
     })
 })
@@ -58,7 +62,7 @@ app.get("/media", restrict, (request, response) => {
 
 app.get("/api/media/:type", restrict, mediaController.getMedia)
 app.post("/api/media/:type", restrict, mediaController.addMediaItem)
-app.delete("/api/media/:type/:id", restrict, mediaController.deleteMediaItem)
+app.delete("/api/media/:mediaType/:id", restrict, mediaController.deleteMediaItem)
 
 app.use(express.static(path.join(__dirname, '../public')))
 

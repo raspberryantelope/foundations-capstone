@@ -90,3 +90,26 @@ body {
     background-size: auto 100%;
     background-color: #322e3b;
 }
+
+.collapsible {
+    background-color: #777;
+    color: white;
+    cursor: pointer;
+    padding: 18px;
+    width: 35%;
+    border: none;
+    text-align: center;
+    outline: #9d2a4e 3px solid;
+    font-size: 15px;
+}
+
+.active, .collapsible:hover {
+    background-color: #555;
+}
+
+.content {
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+    background-color: #f1f1f1;
+}

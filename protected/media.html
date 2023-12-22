@@ -3,44 +3,81 @@
     <head>
         <meta charset="UTF-8">
         <title>Media</title>
-        <link rel="stylesheet" href="../public/media.css">
+        <link rel="stylesheet" href="/media.css">
     </head>
     <body>
         <header>
-            <a href="../public/index.html"><img src="../public/logo.test.new.new.png" alt="Media Tracker Logo" id="homeButton"></a>
+            <a href="/"><img src="/logo.test.new.new.png" alt="Media Tracker Logo" id="homeButton"></a>
             <h2>Media Tracker</h2>
             <nav>
                 <ul>
-                    <li><a href="dashboard.html" class="header-button">Dashboard</a></li>
-                    <li><a href="profile.html" class="header-button">Profile</a></li>
-                    <li><a href="media.html" class="header-button">Media</a></li>
-                    <li><a href="logout.html" class="header-button" id="log-button"></a></li>
+                    <li><a href="/dashboard" class="header-button">Dashboard</a></li>
+                    <li><a href="/profile" class="header-button">Profile</a></li>
+                    <li><a href="/media" class="header-button">Media</a></li>
+                    <li><a href="/logout" class="header-button" id="log-button"></a></li>
                 </ul>
             </nav>
         </header>
         <div id="media-container">
+            <form id="media-form">
+                <label for="media-title">Title</label>
+                <input type="text" id="media-title" placeholder="Title" required>
+                <label for="media-image">Image URL</label>
+                <input type="text" id="media-image" placeholder="Image URL">
+                <label for="media-type">Type</label>
+                <select name="media-type" id="media-type">
+                    <option value="movie">Movie</option>
+                    <option value="show">TV Show</option>
+                    <option value="music">Music</option>
+                    <option value="book">Book</option>
+                    <option value="audiobook">Audiobook</option>
+                </select>
+                <label for="media-status">Status</label>
+                <select name="media-status" id="media-status">
+                    <option value="Untouched">Untouched</option>
+                    <option value="Complete">Complete</option>
+                    <option value="Complete (Low Quality)">Complete (Low Quality)</option>
+                    <option value="Unfinished (Still Airing)">Unfinished (Still Airing)</option>
+                    <option value ="Unfinished (Incomplete)">Unfinished (Incomplete)</option>
+                    <option value="Unreleased">Unreleased</option>
+                    <option value="White Whale">White Whale</option>
+                </select>
+                <label for="media-check-status">Check?</label>
+                <input type="checkbox" id="media-check-status" name="media-check-status" value="Check?">
+                <button type="submit">Add Media</button>
+            </form>
             <div id="movie-container">
-                <h1>Movies</h1>
-                <div id="movies-list"></div>
+                <button class="collapsible">Movies</button>
+                <div class="collapsible">
+                    <div id="movies-list"></div>
+                </div>
             </div>
             <div id="show-container">
-                <h1>TV Shows</h1>
-                <div id="shows-list"></div>
+                <button class="collapsible">TV Shows</button>
+                <div class="collapsible">
+                    <div id="shows-list"></div>
+                </div>
             </div>
             <div id="music-container">
-                <h1>Music</h1>
-                <div id="music-list"></div>
+                <button class="collapsible">Music</button>
+                <div class="collapsible">
+                    <div id="music-list"></div>
+                </div>
             </div>
             <div id="book-container">
-                <h1>Books</h1>
-                <div id="books-list"></div>
+                <button class="collapsible">Books</button>
+                <div class="collapsible">
+                    <div id="books-list"></div>
+                </div>
             </div>
             <div id="audiobook-container">
-                <h1>Audiobooks</h1>
-                <div id="audiobooks-list"></div>
+                <button class="collapsible">Audiobooks</button>
+                <div class="collapsible">
+                    <div id="audiobooks-list"></div>
+                </div>
             </div>
         </div>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-        <script src="../public/media.js"></script>
+        <script src="/media.js"></script>
     </body>
 </html>

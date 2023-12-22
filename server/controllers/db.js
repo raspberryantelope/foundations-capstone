@@ -11,17 +11,56 @@ const Audiobooks = require('../../models/audiobook')(sequelize, Sequelize.DataTy
 
 sequelize
     .sync({ force: true })
-    .then(() => {
+    .then(async () => {
     console.log('Tables created')
-    /*seedDatabase()*/
+    await seedDatabase()
+    console.log('Database seeded')
     })
     .catch(error => console.error('Error creating tables', error))
 
-function seedDatabase() {
-    Users.create({ /* ... user data ... */ })
-    Movies.create({ /* ... movie data ... */ })
-    TvShows.create({ /* ... show data ... */ })
-    Music.create({ /* ... music data ... */ })
-    Books.create({ /* ... book data ... */ })
-    Audiobooks.create({ /* ... audiobook data ... */ })
+async function seedDatabase() {
+    await Users.create({
+        username: "testes",
+        passwordHash: "test",
+        email: "test2@test.com",
+        profilePic: "test.com",
+        about: "test",
+        joinDate: new Date()
+    })
+    await Movies.create({
+        userID: 1,
+        title: "The Godfather",
+        movieImg: "https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg",
+        checkStatus: false,
+        status: "Untouched"
+    })
+    await TvShows.create({
+        userID: 1,
+        title: "Game of Thrones",
+        showImg: "https://m.media-amazon.com/images/M/MV5BYTRiNDQwYzAtMzVlZS00NTczLWJiYmYtZGRkZjlhNGM0NjJhXkEyXkFqcGdeQXVyNDUyOTg3Njg@._V1_.jpg",
+        checkStatus: false,
+        status: "Untouched"
+    })
+    await Music.create({
+        userID: 1,
+        title: "After Me",
+        musicImg: "https://upload.wikimedia.org/wikipedia/en/0/0b/AfterMe.jpg",
+        checkStatus: false,
+        status: "Untouched"
+    })
+    await Books.create({
+        userID: 1,
+        title: "The Catcher in the Rye",
+        bookImg: "https://upload.wikimedia.org/wikipedia/en/1/13/The_Catcher_in_the_Rye.jpg",
+        checkStatus: false,
+        status: "Untouched"
+    })
+    await Audiobooks.create({
+        userID: 1,
+        title: "The Catcher in the Rye",
+        audiobookImg: "https://upload.wikimedia.org/wikipedia/en/1/13/The_Catcher_in_the_Rye.jpg",
+        checkStatus: false,
+        status: "Untouched"
+    })
 }
+
