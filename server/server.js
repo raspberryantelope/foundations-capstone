@@ -62,7 +62,7 @@ app.get("/media", restrict, (request, response) => {
 
 app.get("/api/media/:type", restrict, mediaController.getMedia)
 app.post("/api/media/:type", restrict, mediaController.addMediaItem)
-app.delete("/api/media/:mediaType/:id", restrict, mediaController.deleteMediaItem)
+app.delete("/api/media/:type/:id", restrict, mediaController.deleteMediaItem)
 
 app.use(express.static(path.join(__dirname, '../public')))
 

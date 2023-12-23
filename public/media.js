@@ -20,7 +20,7 @@ function getMedia(mediaType) {
     const mediaTypePlural = mediaTypeToPlural[mediaType] || `${mediaType}`
     const mediaList = document.querySelector(`#${mediaTypePlural}-list`)
     if (!mediaList) {
-        console.error(`Element with ID ${mediaType}s-list not found`)
+        console.error(`Element with ID ${mediaTypePlural}-list not found`)
         return
     }
     mediaList.innerHTML = ""
@@ -34,9 +34,9 @@ function getMedia(mediaType) {
                 let mediaCard = `
                     <div class="${mediaType}-card">
                         <h2>${item.title}</h2>
-                        <img src="${item.image}" alt="${item.title}">
+                        <img src="${item[`${mediaType}Img`]}" alt="${item.title}">
                         <p>${item.status}</p>
-                        <button onclick="deleteMediaItem('${mediaType}', ${item.id})">Delete</button>
+                        <button onclick="deleteMediaItem('${mediaType}', ${item[`${mediaType}ID`]})">Delete</button>
                     </div>
                 `
 
@@ -50,10 +50,12 @@ function getMedia(mediaType) {
 }
 
 function deleteMediaItem(mediaType, id) {
+    const mediaTypePlural = mediaTypeToPlural[mediaType] || `${mediaType}`
+    console.log(mediaType)
     axios
         .delete(`/api/media/${mediaType}/${id}`)
         .then(() => {
-            getMedia(mediaType)
+            getMedia(mediaTypePlural[mediaType] || mediaType)
         })
         .catch((error) => {
             console.log(error)

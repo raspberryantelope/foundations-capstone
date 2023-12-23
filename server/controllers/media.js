@@ -1,4 +1,5 @@
 const Sequelize = require('sequelize')
+const {where} = require("sequelize");
 const sequelize = new Sequelize(process.env.DATABASE_URL, {
     dialect: "postgres",
 })
@@ -60,10 +61,11 @@ const addMediaItem = async (request, response) => {
     console.log("request body:", request.body)
     try {
         console.log("media type:", mediaType)
+        console.log(`${mediaType}Img:`)
         const newMediaItem = await models[mediaType].create({
             userID,
             title,
-            [`{mediaType}Img`]: image,
+            [`${mediaType}Img`]: image,
             checkStatus,
             status
         })
@@ -75,7 +77,18 @@ const addMediaItem = async (request, response) => {
 }
 
 const deleteMediaItem = async (request, response) => {
-//tbd
+    const mediaType = request.params.type
+    console.log("deletion type:", mediaType)
+    const mediaID = request.params.id
+    console.log("deletion id:", mediaID)
+    const idKey = `${mediaType}ID`
+    try {
+        await models[mediaType].destroy({where: {[idKey]: mediaID}})
+        response.sendStatus(204)
+    } catch (error) {
+        console.log("Error deleting media item:", error)
+        response.status(500).send("Something went wrong while deleting media item")
+    }
 }
 
 module.exports = {
