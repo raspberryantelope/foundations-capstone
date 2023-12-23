@@ -11,7 +11,7 @@ module.exports = (sequelize) => {
         status: { type: DataTypes.ENUM, values: ['Untouched', 'Complete', 'Complete (Low Quality)', 'Unfinished (Still Airing)', 'Unfinished (Incomplete)', 'Unreleased', 'White Whale'], allowNull: false }
     }, {
         sequelize,
-        modelName: 'Movie',
+        modelName: 'movie',
         timestamps: true,
         tableName: 'movies'
     })

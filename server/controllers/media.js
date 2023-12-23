@@ -3,15 +3,21 @@ const sequelize = new Sequelize(process.env.DATABASE_URL, {
     dialect: "postgres",
 })
 const MovieModel = require('../../models/movie')(sequelize, Sequelize.DataTypes)
-const models = {
+/*const models = {
     users: require("../../models/user")(sequelize, Sequelize.DataTypes),
     movies: require('../../models/movie')(sequelize, Sequelize.DataTypes),
     shows: require('../../models/show')(sequelize, Sequelize.DataTypes),
     music: require('../../models/music')(sequelize, Sequelize.DataTypes),
     books: require('../../models/book')(sequelize, Sequelize.DataTypes),
     audiobooks: require('../../models/audiobook')(sequelize, Sequelize.DataTypes)
-/*
-    movies: MovieModel*/
+}*/
+const models = {
+    user: require("../../models/user")(sequelize, Sequelize.DataTypes),
+    movie: require('../../models/movie')(sequelize, Sequelize.DataTypes),
+    show: require('../../models/show')(sequelize, Sequelize.DataTypes),
+    music: require('../../models/music')(sequelize, Sequelize.DataTypes),
+    book: require('../../models/book')(sequelize, Sequelize.DataTypes),
+    audiobook: require('../../models/audiobook')(sequelize, Sequelize.DataTypes)
 }
 
 const getMedia = async (request, response) => {
@@ -57,7 +63,7 @@ const addMediaItem = async (request, response) => {
         const newMediaItem = await models[mediaType].create({
             userID,
             title,
-            [`${mediaType}Img`]: image,
+            [`{mediaType}Img`]: image,
             checkStatus,
             status
         })

@@ -25,8 +25,11 @@ function getMedia(mediaType) {
     }
     mediaList.innerHTML = ""
     axios
-        .get(`/api/media/${mediaTypePlural}`)
+        .get(`/api/media/${mediaType}`)
         .then(response => {
+            if (response.data.length === 0) {
+                mediaList.innerHTML = `<p>No ${mediaTypePlural} found.</p>`
+            } else {
             response.data.forEach(item => {
                 let mediaCard = `
                     <div class="${mediaType}-card">
@@ -36,8 +39,10 @@ function getMedia(mediaType) {
                         <button onclick="deleteMediaItem('${mediaType}', ${item.id})">Delete</button>
                     </div>
                 `
+
                 mediaList.innerHTML += mediaCard
             })
+            }
         })
         .catch((error) => {
             console.log(error)
@@ -79,7 +84,7 @@ function addMediaItem(event) {
         .then(() => {
             document.getElementById("media-form").reset()
             const mediaTypePlural = mediaTypeToPlural[mediaType] || `${mediaType}`
-            getMedia(mediaTypePlural)
+            getMedia(mediaTypePlural[mediaType] || mediaType)
         })
         .catch((error) => {
             console.error("Error adding media item:", error)
@@ -117,9 +122,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 document.getElementById("media-form").addEventListener("submit", addMediaItem)
-getMedia("movies")
-getMedia("shows")
+getMedia("movie")
+getMedia("show")
 getMedia("music")
-getMedia("books")
-getMedia("audiobooks")
+getMedia("book")
+getMedia("audiobook")
 })
