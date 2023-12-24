@@ -96,20 +96,7 @@ function addMediaItem(event) {
         })
 }
 
-/*axios.get('/api/protected-route')
-       .then(response => {
-         // Handle successful response
-       })
-       .catch(error => {
-         if (error.response && error.response.status === 401) {
-           // Redirect to login page
-           window.location.href = '/login.html'; // Make sure this path is correct
-         } else {
-           // Handle other errors
-           console.error('An error occurred:', error);
-         }
-       });*/
-document.addEventListener("DOMContentLoaded", () => {
+/*document.addEventListener("DOMContentLoaded", () => {
     let collapse = document.getElementsByClassName("collapsible")
     for (let i = 0; i < collapse.length; i++) {
         collapse[i].addEventListener("click", function () {
@@ -129,4 +116,27 @@ getMedia("show")
 getMedia("music")
 getMedia("book")
 getMedia("audiobook")
+})*/
+
+document.addEventListener("DOMContentLoaded", () => {
+    let collapsibles = document.getElementsByClassName("collapsible")
+    for (let i = 0; i < collapsibles.length; i++) {
+        collapsibles[i].addEventListener("click", function () {
+            this.classList.toggle("active")
+            let content = this.nextElementSibling
+            if (content.style.display === "block") {
+                content.style.display = "none"
+                content.style.marginBottom = "0"
+            } else {
+                content.style.display = "block"
+                content.style.marginBottom = "1em"
+            }
+        })
+    }
+    document.getElementById("media-form").addEventListener("submit", addMediaItem)
+    getMedia("movie")
+    getMedia("show")
+    getMedia("music")
+    getMedia("book")
+    getMedia("audiobook")
 })

@@ -46,34 +46,64 @@
                 <input type="checkbox" id="media-check-status" name="media-check-status" value="Check?">
                 <button type="submit">Add Media</button>
             </form>
-            <div id="movie-container">
-                <button class="collapsible">Movies</button>
-                <div class="collapsible">
-                    <div id="movies-list"></div>
+            <div id="all-media-container">
+                <button class="collapsible">All Media</button>
+                <div class="content">
+                    <div id="all-media-list"></div>
                 </div>
             </div>
-            <div id="show-container">
-                <button class="collapsible">TV Shows</button>
-                <div class="collapsible">
-                    <div id="shows-list"></div>
+            <div class ="media-row">
+                <div id="movie-container" class="media-type-container">
+                    <div class ="collapsible-container">
+                        <button class="collapsible">Movies</button>
+                        <div class="content">
+                            <div id="movies-list"></div>
+                        </div>
+                    </div>
+                </div>
+                <div id="show-container" class="media-type-container">
+                    <div class ="collapsible-container">
+                        <button class="collapsible">TV Shows</button>
+                        <div class="content">
+                            <div id="shows-list"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div id="music-container">
-                <button class="collapsible">Music</button>
-                <div class="collapsible">
-                    <div id="music-list"></div>
+            <div class ="media-row">
+                <div id="music-container" class="media-type-container">
+                    <div class ="collapsible-container">
+                        <button class="collapsible">Music</button>
+                        <div class="content">
+                            <div id="music-list"></div>
+                        </div>
+                    </div>
+                </div>
+                <div id="audiobook-container" class="media-type-container">
+                    <div class ="collapsible-container">
+                        <button class="collapsible">Audiobooks</button>
+                        <div class="content">
+                            <div id="audiobooks-list"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div id="book-container">
-                <button class="collapsible">Books</button>
-                <div class="collapsible">
-                    <div id="books-list"></div>
+            <div class ="media-row">
+                <div id="book-container" class="media-type-container">
+                    <div class ="collapsible-container">
+                        <button class="collapsible">Books</button>
+                        <div class="content">
+                            <div id="books-list"></div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div id="audiobook-container">
-                <button class="collapsible">Audiobooks</button>
-                <div class="collapsible">
-                    <div id="audiobooks-list"></div>
+                <div id="other-container" class="media-type-container">
+                    <div class ="collapsible-container">
+                        <button class="collapsible">Other</button>
+                        <div class="content">
+                            <div id="other-list"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
