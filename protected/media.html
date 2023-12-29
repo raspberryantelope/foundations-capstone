@@ -47,16 +47,35 @@
                 <button type="submit">Add Media</button>
             </form>
             <div id="all-media-container">
-                <button class="collapsible">All Media</button>
-                <div class="content">
-                    <div id="all-media-list"></div>
-                </div>
+                <div class ="collapsible-container">
+                    <button class="collapsible">All Media</button>
+                    <div class="content">
+                        <div id="all-media-list"></div>
+                    </div>
+                    </div>
             </div>
             <div class ="media-row">
                 <div id="movie-container" class="media-type-container">
                     <div class ="collapsible-container">
                         <button class="collapsible">Movies</button>
                         <div class="content">
+                            <form id="movie-sort-form">
+                                <label for="movie-sort-by">Sort by:</label>
+                                <select name="sort-by" id="movie-sort-by">
+                                    <option value="title">Title</option>
+                                    <option value="status">Status</option>
+                                    <option value="mediaType">Type</option>
+                                    <option value="checkStatus">Check</option>
+                                    <option value="createdAt">Date Added</option>
+                                    <option value="updatedAt">Date Updated</option>
+                                </select>
+                                <label for="movie-sort-order">Order:</label>
+                                <select name="sort-order" id="movie-sort-order">
+                                    <option value="asc">Ascending</option>
+                                    <option value="desc">Descending</option>
+                                </select>
+                                <button type="submit">Sort</button>
+                            </form>
                             <div id="movies-list"></div>
                         </div>
                     </div>
@@ -65,6 +84,23 @@
                     <div class ="collapsible-container">
                         <button class="collapsible">TV Shows</button>
                         <div class="content">
+                            <form id="show-sort-form">
+                                <label for="show-sort-by">Sort by:</label>
+                                <select name="sort-by" id="show-sort-by">
+                                    <option value="title">Title</option>
+                                    <option value="status">Status</option>
+                                    <option value="mediaType">Type</option>
+                                    <option value="checkStatus">Check</option>
+                                    <option value="createdAt">Date Added</option>
+                                    <option value="updatedAt">Date Updated</option>
+                                </select>
+                                <label for="show-sort-order">Order:</label>
+                                <select name="sort-order" id="show-sort-order">
+                                    <option value="asc">Ascending</option>
+                                    <option value="desc">Descending</option>
+                                </select>
+                                <button type="submit">Sort</button>
+                            </form>
                             <div id="shows-list"></div>
                         </div>
                     </div>
@@ -75,6 +111,23 @@
                     <div class ="collapsible-container">
                         <button class="collapsible">Music</button>
                         <div class="content">
+                            <form id="music-sort-form">
+                                <label for="music-sort-by">Sort by:</label>
+                                <select name="sort-by" id="music-sort-by">
+                                    <option value="title">Title</option>
+                                    <option value="status">Status</option>
+                                    <option value="mediaType">Type</option>
+                                    <option value="checkStatus">Check</option>
+                                    <option value="createdAt">Date Added</option>
+                                    <option value="updatedAt">Date Updated</option>
+                                </select>
+                                <label for="music-sort-order">Order:</label>
+                                <select name="music-sort-order" id="music-sort-order">
+                                    <option value="asc">Ascending</option>
+                                    <option value="desc">Descending</option>
+                                </select>
+                                <button type="submit">Sort</button>
+                            </form>
                             <div id="music-list"></div>
                         </div>
                     </div>
@@ -83,6 +136,23 @@
                     <div class ="collapsible-container">
                         <button class="collapsible">Audiobooks</button>
                         <div class="content">
+                            <form id="audiobook-sort-form">
+                                <label for="audiobook-sort-by">Sort by:</label>
+                                <select name="audiobook-sort-by" id="audiobook-sort-by">
+                                    <option value="title">Title</option>
+                                    <option value="status">Status</option>
+                                    <option value="mediaType">Type</option>
+                                    <option value="checkStatus">Check</option>
+                                    <option value="createdAt">Date Added</option>
+                                    <option value="updatedAt">Date Updated</option>
+                                </select>
+                                <label for="audiobook-sort-order">Order:</label>
+                                <select name="audiobook-sort-order" id="audiobook-sort-order">
+                                    <option value="asc">Ascending</option>
+                                    <option value="desc">Descending</option>
+                                </select>
+                                <button type="submit">Sort</button>
+                            </form>
                             <div id="audiobooks-list"></div>
                         </div>
                     </div>
@@ -93,6 +163,23 @@
                     <div class ="collapsible-container">
                         <button class="collapsible">Books</button>
                         <div class="content">
+                            <form id="book-sort-form">
+                                <label for="book-sort-by">Sort by:</label>
+                                <select name="book-sort-by" id="book-sort-by">
+                                    <option value="title">Title</option>
+                                    <option value="status">Status</option>
+                                    <option value="mediaType">Type</option>
+                                    <option value="checkStatus">Check</option>
+                                    <option value="createdAt">Date Added</option>
+                                    <option value="updatedAt">Date Updated</option>
+                                </select>
+                                <label for="book-sort-order">Order:</label>
+                                <select name="bok-sort-order" id="book-sort-order">
+                                    <option value="asc">Ascending</option>
+                                    <option value="desc">Descending</option>
+                                </select>
+                                <button type="submit">Sort</button>
+                            </form>
                             <div id="books-list"></div>
                         </div>
                     </div>
@@ -101,6 +188,23 @@
                     <div class ="collapsible-container">
                         <button class="collapsible">Other</button>
                         <div class="content">
+                            <form id="other-sort-form">
+                                <label for="other-sort-by">Sort by:</label>
+                                <select name="other-sort-by" id="other-sort-by">
+                                    <option value="title">Title</option>
+                                    <option value="status">Status</option>
+                                    <option value="mediaType">Type</option>
+                                    <option value="checkStatus">Check</option>
+                                    <option value="createdAt">Date Added</option>
+                                    <option value="updatedAt">Date Updated</option>
+                                </select>
+                                <label for="other-sort-order">Order:</label>
+                                <select name="other-sort-order" id="other-sort-order">
+                                    <option value="asc">Ascending</option>
+                                    <option value="desc">Descending</option>
+                                </select>
+                                <button type="submit">Sort</button>
+                            </form>
                             <div id="other-list"></div>
                         </div>
                     </div>
