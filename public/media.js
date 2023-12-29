@@ -18,6 +18,7 @@ const mediaTypeToPlural = {
     music: "music",
     book: "books",
     audiobook: "audiobooks",
+    other: "other",
 }
 function getMedia(mediaType, sortBy = "title", sortOrder = "asc") {
     const mediaTypePlural = mediaTypeToPlural[mediaType] || `${mediaType}`
@@ -27,7 +28,7 @@ function getMedia(mediaType, sortBy = "title", sortOrder = "asc") {
         return
     }
     mediaList.innerHTML = ""
-    axios
+    return axios
         .get(`/api/media/${mediaType}?sortBy=${sortBy}&sortOrder=${sortOrder}`)
         .then(response => {
             if (response.data.length === 0) {
@@ -35,7 +36,7 @@ function getMedia(mediaType, sortBy = "title", sortOrder = "asc") {
             } else {
             response.data.forEach(item => {
                 let mediaCard = `
-                    <div class="${mediaType}-card" ${item.checkStatus ? "checked-media-card" : ""} id="${item[`${mediaType}ID`]}">
+                    <div class="${mediaType}-card ${item.checkStatus ? 'checked-media-card' : ''}" id="${mediaType}-${item[`${mediaType}ID`]}">
                         <div class="status-circle status-${sanitizeClassName(item.status)}" title="${item.status}"></div>
                         <h2>${item.title}</h2>
                         <img src="${item[`${mediaType}Img`]}" alt="${item.title}">
@@ -43,9 +44,9 @@ function getMedia(mediaType, sortBy = "title", sortOrder = "asc") {
                         <p><b>Added: </b>${new Date(item.createdAt).toLocaleDateString()}</p>
                         <p><b>Updated: </b>${new Date(item.updatedAt).toLocaleDateString()}</p>
                         <div class="media-edit-form" id="edit-${mediaType}-form-${item[`${mediaType}ID`]}" style="display: none;">
-                            <input type="text" id="edit-title-${item[`${mediaType}ID`]}" value="${item.title}">
-                            <input type="text" id="edit-image-${item[`${mediaType}ID`]}" value="${item[`${mediaType}Img`]}">
-                            <select id="edit-status-${item[`${mediaType}ID`]}">
+                            <input type="text" id="edit-${mediaType}-title-${item[`${mediaType}ID`]}" value="${item.title}">
+                            <input type="text" id="edit-${mediaType}-image-${item[`${mediaType}ID`]}" value="${item[`${mediaType}Img`]}">
+                            <select id="edit-${mediaType}-status-${item[`${mediaType}ID`]}"">
                                 <option value="Untouched">Untouched</option>
                                 <option value="Complete">Complete</option>
                                 <option value="Complete (Low Quality)">Complete (Low Quality)</option>
@@ -54,7 +55,7 @@ function getMedia(mediaType, sortBy = "title", sortOrder = "asc") {
                                 <option value="Unreleased">Unreleased</option>
                                 <option value="White Whale">White Whale</option>
                             </select>
-                            <input type="checkbox" id="edit-check-status-${item[`${mediaType}ID`]}" name="edit-check-status-${item[`${mediaType}ID`]}" value="${item.checkStatus}">
+                            <input type="checkbox" id="edit-${mediaType}-check-status-${item[`${mediaType}ID`]}" name="edit-check-status-${item[`${mediaType}ID`]}" ${item.checkStatus ? 'checked' : ''}>
                             <button id="update-${mediaType}-${item[`${mediaType}ID`]}" type="button" onclick="updateMediaItem('${mediaType}', ${item[`${mediaType}ID`]})">Update</button>
                             <button id="cancel-${mediaType}-${item[`${mediaType}ID`]}" type="button" onclick="cancelEditMediaItem('${mediaType}', ${item[`${mediaType}ID`]})">Cancel</button>
                         </div>
@@ -71,6 +72,40 @@ function getMedia(mediaType, sortBy = "title", sortOrder = "asc") {
             console.log(error)
         })
 }
+
+function getAllMedia(sortBy = "type", sortOrder = "asc") {
+    const mediaTypes = Object.keys(mediaTypeToPlural)
+    const mediaPromises = mediaTypes.map(type => axios.get(`/api/media/${type}`))
+
+    Promise.all(mediaPromises)
+        .then(responses => {
+            const allMediaList = document.querySelector("#all-media-list")
+            allMediaList.innerHTML = ""
+
+            responses.forEach((response, index) => {
+                const mediaType = mediaTypes[index]
+                response.data.forEach(item => {
+                let mediaCard = `
+                    <div class="${mediaType}-card ${item.checkStatus ? 'checked-media-card' : ''}" id="all-${mediaType}-${item[`${mediaType}ID`]}">
+                        <div class="media-type-circle media-type-${mediaType}" title="${mediaType}"></div>
+                        <div class="status-circle status-${sanitizeClassName(item.status)}" title="${item.status}"></div>
+                        <h2>${item.title}</h2>
+                        <img src="${item[`${mediaType}Img`]}" alt="${item.title}">
+                        <p><b>Type: </b>${mediaType}</p>
+                        <p><b>Status: </b>${item.status}</p>
+                        <p><b>Added: </b>${new Date(item.createdAt).toLocaleDateString()}</p>
+                        <p><b>Updated: </b>${new Date(item.updatedAt).toLocaleDateString()}</p>
+                    </div>
+                    `
+                    allMediaList.innerHTML += mediaCard
+                })
+            })
+        })
+        .catch((error) => {
+            console.error("Error fetching all media:", error)
+        })
+}
+
 
 function deleteMediaItem(mediaType, id) {
     const mediaTypePlural = mediaTypeToPlural[mediaType] || `${mediaType}`
@@ -93,7 +128,7 @@ function editMediaItem(mediaType, id) {
     }
 }
 
-function updateMediaItem(mediaType, id) {
+/*function updateMediaItem(mediaType, id) {
     const mediaTypePlural = mediaTypeToPlural[mediaType] || `${mediaType}`
     const title = document.getElementById(`edit-title-${id}`).value
     const imageUrl = document.getElementById(`edit-image-${id}`).value
@@ -116,6 +151,44 @@ function updateMediaItem(mediaType, id) {
             editForm.style.display = "none"
             const editButton = document.getElementById(`edit-${mediaType}-button-${id}`)
             editButton.style.display = "block"
+        })
+        .catch(error => {
+            console.error("Error updating media item:", error)
+        })
+}*/
+
+function updateMediaItem(mediaType, id) {
+    const mediaTypePlural = mediaTypeToPlural[mediaType] || `${mediaType}`
+    const title = document.getElementById(`edit-${mediaType}-title-${id}`).value
+    const imageUrl = document.getElementById(`edit-${mediaType}-image-${id}`).value
+    const status = document.getElementById(`edit-${mediaType}-status-${id}`).value
+    const checkStatus = document.getElementById(`edit-${mediaType}-check-status-${id}`).checked
+
+
+    const updatedMediaItem = {
+        title,
+        [`${mediaType}Img`]: imageUrl,
+        checkStatus,
+        status
+    }
+
+    axios.put(`/api/media/${mediaType}/${id}`, updatedMediaItem)
+        .then(response => {
+            return getMedia(mediaTypePlural[mediaType] || mediaType)
+        })
+        .then(() => {
+            const editForm = document.getElementById(`edit-${mediaType}-form-${id}`)
+            if (editForm) {
+                editForm.style.display = "none"
+            } else {
+                console.error(`Failed to find edit form with ID: edit-${mediaType}-form-${id}`)
+            }
+            const editButton = document.getElementById(`edit-${mediaType}-button-${id}`)
+            if (editButton) {
+                editButton.style.display = "block"
+            } else {
+                console.error(`Failed to find edit button with ID: edit-${mediaType}-button-${id}`)
+            }
         })
         .catch(error => {
             console.error("Error updating media item:", error)
@@ -210,6 +283,7 @@ document.addEventListener("DOMContentLoaded", () => {
     getMedia("music")
     getMedia("book")
     getMedia("audiobook")
+    getMedia("other")
 })
 
 document.getElementById("movie-sort-form").addEventListener("submit", (event) => {
@@ -242,10 +316,16 @@ document.getElementById("book-sort-form").addEventListener("submit", (event) => 
     const sortOrder = document.getElementById("book-sort-order").value
     getMedia("book", sortBy, sortOrder)
 })
-/*
 document.getElementById("other-sort-form").addEventListener("submit", (event) => {
     event.preventDefault()
     const sortBy = document.getElementById("other-sort-by").value
     const sortOrder = document.getElementById("other-sort-order").value
     getMedia("other", sortBy, sortOrder)
-})*/
+})
+
+document.getElementById("all-media-sort-form").addEventListener("submit", (event) => {
+    event.preventDefault()
+    const sortBy = document.getElementById("all-media-sort-by").value
+    const sortOrder = document.getElementById("all-media-sort-order").value
+    getAllMedia(
+})

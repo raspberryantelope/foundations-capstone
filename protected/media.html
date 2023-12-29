@@ -29,8 +29,9 @@
                     <option value="movie">Movie</option>
                     <option value="show">TV Show</option>
                     <option value="music">Music</option>
-                    <option value="book">Book</option>
                     <option value="audiobook">Audiobook</option>
+                    <option value="book">Book</option>
+                    <option value="other">Other</option>
                 </select>
                 <label for="media-status">Status</label>
                 <select name="media-status" id="media-status">
@@ -48,8 +49,25 @@
             </form>
             <div id="all-media-container">
                 <div class ="collapsible-container">
-                    <button class="collapsible">All Media</button>
+                    <button class="collapsible" onclick="getAllMedia()">All Media</button>
                     <div class="content">
+                        <form id="all-media-sort-form">
+                            <label for="all-media-sort-by">Sort by:</label>
+                            <select name="sort-by" id="all-media-sort-by">
+                                <option value="title">Title</option>
+                                <option value="status">Status</option>
+                                <option value="mediaType">Type</option>
+                                <option value="checkStatus">Check</option>
+                                <option value="createdAt">Date Added</option>
+                                <option value="updatedAt">Date Updated</option>
+                            </select>
+                            <label for="all-media-sort-order">Order:</label>
+                            <select name="sort-order" id="all-media-sort-order">
+                                <option value="asc">Ascending</option>
+                                <option value="desc">Descending</option>
+                            </select>
+                            <button type="submit">Sort</button>
+                        </form>
                         <div id="all-media-list"></div>
                     </div>
                     </div>

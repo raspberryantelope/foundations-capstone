@@ -268,3 +268,41 @@ body {
 .media-edit-form {
     color: white;
 }
+
+.media-type-circle {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.media-type-movie {
+    background-color: #bd8bff;
+}
+
+.media-type-show {
+    background-color: #ff617e;
+}
+
+.media-type-music {
+    background-color: #1dacd6;
+}
+
+.media-type-audiobook {
+    background-color: #ffbd88;
+}
+
+.media-type-book {
+    background-color: #30ba8f;
+}
+
+.media-type-other {
+    background-color: #ff7f49;
+}
+
+#all-media-container .status-circle {
+    top: 35px;
+    right: 10px;
+}

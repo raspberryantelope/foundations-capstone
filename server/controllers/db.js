@@ -8,6 +8,7 @@ const TvShows = require('../../models/show')(sequelize, Sequelize.DataTypes)
 const Music = require('../../models/music')(sequelize, Sequelize.DataTypes)
 const Books = require('../../models/book')(sequelize, Sequelize.DataTypes)
 const Audiobooks = require('../../models/audiobook')(sequelize, Sequelize.DataTypes)
+const Other = require('../../models/other')(sequelize, Sequelize.DataTypes)
 
 sequelize
     .sync({ force: true })
@@ -61,6 +62,13 @@ async function seedDatabase() {
         audiobookImg: "https://upload.wikimedia.org/wikipedia/en/1/13/The_Catcher_in_the_Rye.jpg",
         checkStatus: false,
         status: "Untouched"
+    })
+    await Other.create({
+        userID: 1,
+        title: "ZB Journal",
+        otherImg: "https://media.discordapp.net/attachments/562459983711567888/1185305556785823885/IMG_8026.jpg?ex=65985b52&is=6585e652&hm=9427cb356143e24bef5595618d3ed68b6bdaae1356ca6c14e0a6961d0bc5a372&=&format=webp&width=800&height=842",
+        checkStatus: false,
+        status: "Complete"
     })
 }
 

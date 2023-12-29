@@ -10,7 +10,8 @@ const models = {
     show: require('../../models/show')(sequelize, Sequelize.DataTypes),
     music: require('../../models/music')(sequelize, Sequelize.DataTypes),
     book: require('../../models/book')(sequelize, Sequelize.DataTypes),
-    audiobook: require('../../models/audiobook')(sequelize, Sequelize.DataTypes)
+    audiobook: require('../../models/audiobook')(sequelize, Sequelize.DataTypes),
+    other: require('../../models/other')(sequelize, Sequelize.DataTypes)
 }
 
 const getMedia = async (request, response) => {
