@@ -12,7 +12,7 @@
          -+ Media List: A table or grid view showing the media with columns for name, status, type, and actions.
             =used container card view, a la previous assignment. nicer aesthetics. also included dates.
          -+ Add Media Button: To open a form to add new media items.
-            TODO: Add form hiding and showing on button click
+
          -+ Sort Options: To sort the list by media type or status.
             =each container has its own sort options
          -= Navigation Bar: With links to different sections (Movies, TV Shows, Music, etc.).
@@ -20,8 +20,6 @@
             =also have list containing all categories
 - User Greeting: Display the user's username
 -++ And a logout button.
-TODO: Add logout button functionality
-TODO: Add greeting to logged in users
 
 
 +Add/Edit Media Form

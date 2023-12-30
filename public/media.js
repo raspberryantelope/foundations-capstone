@@ -37,7 +37,6 @@ checkLoginStatus()
 
 function displayUsername() {
     const username = sessionStorage.getItem("username")
-    console.log(username)
     if (username) {
         const welcomeMessage = document.getElementById("header-welcome-message")
         welcomeMessage.textContent = `Welcome, ${username}`
@@ -277,7 +276,6 @@ function addMediaItem(event) {
     mediaType = mediaType.endsWith("s") ? mediaType.slice(0, -1) : mediaType
     const checkStatus = document.getElementById("media-check-status").checked
     const status = document.getElementById("media-status").value
-    console.log("submitting media type:", mediaType)
 
     const body = {
         title: title,
@@ -285,8 +283,6 @@ function addMediaItem(event) {
         checkStatus: checkStatus,
         status: status
     }
-    console.log(body)
-    console.log("submitted media type:", mediaType)
 
     axios
         .post(`/api/media/${mediaType}`, body)

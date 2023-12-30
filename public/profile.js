@@ -36,7 +36,6 @@ checkLoginStatus()
 
 function displayUsername() {
     const username = sessionStorage.getItem("username")
-    console.log(username)
     if (username) {
         const welcomeMessage = document.getElementById("header-welcome-message")
         welcomeMessage.textContent = `Welcome, ${username}`

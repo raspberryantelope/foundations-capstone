@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize')
-const {where} = require("sequelize");
+const { where } = require("sequelize")
 const sequelize = new Sequelize(process.env.DATABASE_URL, {
     dialect: "postgres",
 })
@@ -32,9 +32,6 @@ const addMediaItem = async (request, response) => {
     const mediaType = request.params.type
     const userID = request.session.userID
     const { title, image, checkStatus, status } = request.body
-    Object.entries(models).forEach(([key, value]) => {
-        console.log(`Model for ${key}:`, value)
-    })
 
     if (!models[mediaType]) {
         console.error("Invalid media type:", mediaType)

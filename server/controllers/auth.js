@@ -29,51 +29,51 @@ module.exports = {
     },
 
     register: async (request, response) => {
-        let {username, email, password, confirmPassword} = request.body;
+        let {username, email, password, confirmPassword} = request.body
         try {
             let existingUser = await users.findOne({
                 where: {
                     [Sequelize.Op.or]: [{username: username}, {email: email}]
                 }
-            });
+            })
             if (existingUser) {
                 if (existingUser.username === username) {
-                    return response.status(400).send("Username already exists.");
+                    return response.status(400).send("Username already exists.")
                 }
                 if (existingUser.email === email) {
-                    return response.status(400).send("Email already exists.");
+                    return response.status(400).send("Email already exists.")
                 }
             }
             if (username.length < 3) {
-                return response.status(400).send("Username must be at least 3 characters.");
+                return response.status(400).send("Username must be at least 3 characters.")
             }
             if (username.length > 64) {
-                return response.status(400).send("Username must be less than 64 characters.");
+                return response.status(400).send("Username must be less than 64 characters.")
             }
             if (password.length < 8) {
-                return response.status(400).send("Password must be at least 8 characters.");
+                return response.status(400).send("Password must be at least 8 characters.")
             }
             if (!/[a-z]/.test(password)) {
-                return response.status(400).send("Password must contain at least one lowercase letter.");
+                return response.status(400).send("Password must contain at least one lowercase letter.")
             }
             if (!/[A-Z]/.test(password)) {
-                return response.status(400).send("Password must contain at least one uppercase letter.");
+                return response.status(400).send("Password must contain at least one uppercase letter.")
             }
             if (!/[0-9]/.test(password)) {
-                return response.status(400).send("Password must contain at least one number.");
+                return response.status(400).send("Password must contain at least one number.")
             }
             if (password !== confirmPassword) {
-                return response.status(400).send("Passwords do not match.");
+                return response.status(400).send("Passwords do not match.")
             }
-            let passwordHash = await bcrypt.hash(password, 10);
+            let passwordHash = await bcrypt.hash(password, 10)
             let newUser = await users.create({
                 username,
                 email,
                 passwordHash
-            });
-            let returnUser = newUser.get({plain: true});
-            delete returnUser.passwordHash;
-            response.status(201).send(returnUser);
+            })
+            let returnUser = newUser.get({plain: true})
+            delete returnUser.passwordHash
+            response.status(201).send(returnUser)
         } catch (error) {
             console.error("Stack", error.stack)
             if (error.name === "SequelizeValidationError") {
