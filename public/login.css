@@ -373,3 +373,22 @@
                             left: -3%;
                             content: "𝕏";
                         }
+
+.toast-message {
+    position: fixed;
+    bottom: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #81749b;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5%;
+    z-index: 1000;
+    font-size: 2.15rem;
+    opacity: 0;
+    transition: opacity 0.75s ease;
+}
+
+    .toast-message.show {
+        opacity: 1;
+    }

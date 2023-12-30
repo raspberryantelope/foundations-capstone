@@ -27,7 +27,7 @@ const restrict = (request, response, next) => {
     if (request.session.userID) {
         next()
     } else {
-        response.status(401).send("Unauthorized")
+        response.redirect("/login?unauthorized=1")
     }
 }
 
@@ -38,12 +38,20 @@ app.get("/login", (request, response) => {
 app.post("/api/login", authController.login)
 app.post("/api/register", authController.register)
 
+app.get("/api/check-login", (request, response) => {
+    if (request.session.userID) {
+        response.json({ loggedIn: true, userID: request.session.userID, username: request.session.username })
+    } else {
+        response.json({ loggedIn: false })
+    }
+})
+
 app.get("/logout", (request, response) => {
     request.session.destroy(error => {
         if (error) {
             response.status(500).send("Something went wrong")
         } else {
-            response.redirect("/login")
+            response.redirect("/?logoutSuccess=1")
         }
     })
 })

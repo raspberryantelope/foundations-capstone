@@ -16,6 +16,7 @@ module.exports = {
             let authenticated = await bcrypt.compare(password, user.passwordHash)
             if (authenticated) {
                 request.session.userID = user.userID
+                request.session.username = user.username
                 let returnUser = {...user.get()}
                 delete returnUser.passwordHash
                 response.status(200).send(returnUser)

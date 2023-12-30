@@ -12,6 +12,22 @@ function disableRegister() {
 }
 disableRegister()
 
+function showToast(message) {
+    const toast = document.createElement("div")
+    toast.textContent = message
+    toast.className = "toast-message"
+    document.body.appendChild(toast)
+    setTimeout(() => {
+        toast.classList.add("show")
+    }, 100)
+    setTimeout(() => {
+        toast.classList.remove("show")
+        setTimeout(() => {
+            document.body.removeChild(toast)
+        }, 500)
+    }, 5000)
+}
+
 let registerUsername = document.getElementById("register-username")
 let registerUsernameMinLength = document.getElementById("username-requirements-length")
 let registerUsernameMaxLength = document.getElementById("username-requirements-runon")
@@ -100,7 +116,7 @@ document.getElementById("login-button").addEventListener("click", (event) => {
     axios
         .post("http://localhost:4000/api/login", { username, password })
         .then(response => {
-            window.location.href = "/dashboard"
+            window.location.href = "/media"
         })
         .catch(error => {
             console.log(error)
@@ -121,7 +137,8 @@ document.getElementById("register-button").addEventListener("click", (event) => 
 
     axios.post("http://localhost:4000/api/register", { username, email, password, confirmPassword })
     .then(response => {
-        window.location.href = "/login.html"
+        showToast("Registration Successful")
+        document.getElementById("register-form").reset()
     })
     .catch(error => {
         errorMessage.textContent = error.response && error.response.data
@@ -157,4 +174,12 @@ document.querySelectorAll("#login-form input, #register-form input").forEach(inp
         disableRegister()
     })
 })
+
+window.addEventListener("DOMContentLoaded", (event) => {
+    const urlParams = new URLSearchParams(window.location.search)
+    if (urlParams.has("unauthorized")) {
+        showToast("You must be logged in to access this page.")
+    }
+})
+
 

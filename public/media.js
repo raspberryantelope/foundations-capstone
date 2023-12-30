@@ -1,12 +1,60 @@
-function logButtonCheck() {
-    let userID = sessionStorage.getItem("userID")
-    if (userID) {
-        document.getElementById("log-button").innerHTML = "Logout"
-    } else {
-        document.getElementById("log-button").innerHTML = "Login"
+function showToast(message) {
+    const toast = document.createElement("div")
+    toast.textContent = message
+    toast.className = "toast-message"
+    document.body.appendChild(toast)
+    setTimeout(() => {
+        toast.classList.add("show")
+    }, 100)
+    setTimeout(() => {
+        toast.classList.remove("show")
+        setTimeout(() => {
+            document.body.removeChild(toast)
+        }, 500)
+    }, 5000)
+}
+
+function checkLoginStatus() {
+    axios
+        .get("/api/check-login")
+        .then(response => {
+            if (response.data.loggedIn) {
+                sessionStorage.setItem("userID", response.data.userID)
+                sessionStorage.setItem("username", response.data.username)
+                displayUsername()
+            } else {
+                showToast("You must be logged in to view this page")
+                setTimeout(() => {
+                    window.location.href = "/login"
+                }, 5000)
+            }
+        })
+        .catch(error => {
+            console.log("Error checking login status:", error)
+        })
+}
+checkLoginStatus()
+
+function displayUsername() {
+    const username = sessionStorage.getItem("username")
+    console.log(username)
+    if (username) {
+        const welcomeMessage = document.getElementById("header-welcome-message")
+        welcomeMessage.textContent = `Welcome, ${username}`
     }
 }
-logButtonCheck()
+
+function logout() {
+    axios
+        .get("/logout")
+        .then(() => {
+            sessionStorage.clear()
+            window.location.href = "/index.html/?logoutSuccess=1"
+        })
+        .catch(error => {
+            console.log("Error logging out:", error)
+        })
+}
 
 function sanitizeClassName(className) {
     return className.toLowerCase().replace(/[\s()]+/g, '-').replace(/-+/g, '-').replace(/^-+|-+$/g, '')
@@ -59,8 +107,8 @@ function getMedia(mediaType, sortBy = "title", sortOrder = "asc") {
                             <button id="update-${mediaType}-${item[`${mediaType}ID`]}" type="button" onclick="updateMediaItem('${mediaType}', ${item[`${mediaType}ID`]})">Update</button>
                             <button id="cancel-${mediaType}-${item[`${mediaType}ID`]}" type="button" onclick="cancelEditMediaItem('${mediaType}', ${item[`${mediaType}ID`]})">Cancel</button>
                         </div>
-                        <button id="delete-${mediaType}-button-${item[`${mediaType}ID`]}" onclick="deleteMediaItem('${mediaType}', ${item[`${mediaType}ID`]})">Delete</button>
-                        <button id="edit-${mediaType}-button-${item[`${mediaType}ID`]}" onclick="editMediaItem('${mediaType}', ${item[`${mediaType}ID`]})">Edit</button>
+                        <button id="edit-${mediaType}-button-${item[`${mediaType}ID`]}" class="edit-button" onclick="editMediaItem('${mediaType}', ${item[`${mediaType}ID`]})">Edit</button>
+                        <button id="delete-${mediaType}-button-${item[`${mediaType}ID`]}" class="delete-button" onclick="deleteMediaItem('${mediaType}', ${item[`${mediaType}ID`]})">Delete</button>
                     </div>
                 `
 
@@ -73,18 +121,50 @@ function getMedia(mediaType, sortBy = "title", sortOrder = "asc") {
         })
 }
 
-function getAllMedia(sortBy = "type", sortOrder = "asc") {
+function getAllMedia(sortBy = "title", sortOrder = "asc") {
+    const serverSortBy = sortBy === "type" ? "title" : sortBy
+
     const mediaTypes = Object.keys(mediaTypeToPlural)
-    const mediaPromises = mediaTypes.map(type => axios.get(`/api/media/${type}`))
+    const mediaPromises = mediaTypes.map(type => axios.get(`/api/media/${type}?sortBy=${serverSortBy}&sortOrder=${sortOrder}`))
 
     Promise.all(mediaPromises)
         .then(responses => {
             const allMediaList = document.querySelector("#all-media-list")
             allMediaList.innerHTML = ""
+            let combinedMediaItems = []
 
             responses.forEach((response, index) => {
                 const mediaType = mediaTypes[index]
-                response.data.forEach(item => {
+                const typedMediaItems = response.data.map(item => ({ ...item, mediaType }))
+                combinedMediaItems = combinedMediaItems.concat(typedMediaItems)
+            })
+            if (sortBy === "type") {
+                combinedMediaItems.sort((a, b) => {
+                    let aValue = a.mediaType.toLowerCase()
+                    let bValue = b.mediaType.toLowerCase()
+                    if (sortOrder === "asc") {
+                        return aValue < bValue ? -1 : aValue > bValue ? 1 : 0
+                    } else {
+                        return aValue > bValue ? -1 : aValue < bValue ? 1 : 0
+                    }
+                })
+            } else {
+            combinedMediaItems.sort((a, b) => {
+                let aValue = a[sortBy]
+                let bValue = b[sortBy]
+                if (typeof aValue === "string") {
+                    aValue = aValue.toLowerCase()
+                    bValue = bValue.toLowerCase()
+                }
+                if (sortOrder === "asc") {
+                    return aValue < bValue ? -1 : aValue > bValue ? 1 : 0
+                } else {
+                    return aValue > bValue ? -1 : aValue < bValue ? 1 : 0
+                }
+            })
+        }
+                combinedMediaItems.forEach(item => {
+                const mediaType = item.mediaType
                 let mediaCard = `
                     <div class="${mediaType}-card ${item.checkStatus ? 'checked-media-card' : ''}" id="all-${mediaType}-${item[`${mediaType}ID`]}">
                         <div class="media-type-circle media-type-${mediaType}" title="${mediaType}"></div>
@@ -99,7 +179,6 @@ function getAllMedia(sortBy = "type", sortOrder = "asc") {
                     `
                     allMediaList.innerHTML += mediaCard
                 })
-            })
         })
         .catch((error) => {
             console.error("Error fetching all media:", error)
@@ -126,36 +205,11 @@ function editMediaItem(mediaType, id) {
     if (editButton) {
     editButton.style.display = "none"
     }
-}
-
-/*function updateMediaItem(mediaType, id) {
-    const mediaTypePlural = mediaTypeToPlural[mediaType] || `${mediaType}`
-    const title = document.getElementById(`edit-title-${id}`).value
-    const imageUrl = document.getElementById(`edit-image-${id}`).value
-    const status = document.getElementById(`edit-status-${id}`).value
-    const checkStatus = document.getElementById(`edit-check-status-${id}`).checked
-
-
-    const updatedMediaItem = {
-        title,
-        [`${mediaType}Img`]: imageUrl,
-        checkStatus,
-        status
+    const deleteButton = document.getElementById(`delete-${mediaType}-button-${id}`)
+    if (deleteButton) {
+    deleteButton.style.display = "none"
     }
-
-    axios
-        .put(`/api/media/${mediaType}/${id}`, updatedMediaItem)
-        .then(response => {
-            getMedia(mediaTypePlural[mediaType] || mediaType)
-            const editForm = document.getElementById(`edit-${mediaType}-form-${id}`)
-            editForm.style.display = "none"
-            const editButton = document.getElementById(`edit-${mediaType}-button-${id}`)
-            editButton.style.display = "block"
-        })
-        .catch(error => {
-            console.error("Error updating media item:", error)
-        })
-}*/
+}
 
 function updateMediaItem(mediaType, id) {
     const mediaTypePlural = mediaTypeToPlural[mediaType] || `${mediaType}`
@@ -204,6 +258,15 @@ function cancelEditMediaItem(mediaType, id) {
     if (editButton) {
         editButton.style.display = "block"
     }
+    const deleteButton = document.getElementById(`delete-${mediaType}-button-${id}`)
+    if (deleteButton) {
+        deleteButton.style.display = "block"
+    }
+}
+
+function toggleAddMediaForm() {
+    const form = document.getElementById("media-form")
+    form.style.display = form.style.display === "none" ? "flex" : "none"
 }
 
 function addMediaItem(event) {
@@ -239,28 +302,6 @@ function addMediaItem(event) {
             }
         })
 }
-
-/*document.addEventListener("DOMContentLoaded", () => {
-    let collapse = document.getElementsByClassName("collapsible")
-    for (let i = 0; i < collapse.length; i++) {
-        collapse[i].addEventListener("click", function () {
-            this.classList.toggle("active")
-            let content = this.nextElementSibling
-            if (content.style.display === "block") {
-                content.style.display = "none"
-            } else {
-                content.style.display = "block"
-            }
-        })
-    }
-
-document.getElementById("media-form").addEventListener("submit", addMediaItem)
-getMedia("movie")
-getMedia("show")
-getMedia("music")
-getMedia("book")
-getMedia("audiobook")
-})*/
 
 document.addEventListener("DOMContentLoaded", () => {
     let collapsibles = document.getElementsByClassName("collapsible")
@@ -325,7 +366,12 @@ document.getElementById("other-sort-form").addEventListener("submit", (event) =>
 
 document.getElementById("all-media-sort-form").addEventListener("submit", (event) => {
     event.preventDefault()
-    const sortBy = document.getElementById("all-media-sort-by").value
+    const sortBy = document.getElementById("all-media-sort-by").value === 'mediaType' ? 'type' : document.getElementById("all-media-sort-by").value
     const sortOrder = document.getElementById("all-media-sort-order").value
-    getAllMedia(
+    getAllMedia(sortBy, sortOrder)
+})
+
+document.getElementById("logout-button").addEventListener("click", (event) => {
+    event.preventDefault()
+    logout()
 })

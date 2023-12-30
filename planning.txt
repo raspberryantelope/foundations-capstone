@@ -1,27 +1,46 @@
-Login Page
-- Username Field: For the user to enter their username.
-    Requirements
-    Check for existing
-- Password Field: For the user to enter their password.
-    Requirements
-- Login Button: To submit the credentials.
-- Error Message Display: To show any login errors.
++Login Page
+    -++ Username Field: For the user to enter their username.
+        +Requirements
+        +Check for existing
+    -++ Password Field: For the user to enter their password.
+        +Requirements
+    -++ Login Button: To submit the credentials.
+    -++ Error Message Display: To show any login errors.
 
-Main Dashboard
-- Navigation Bar: With links to different sections (Movies, TV Shows, Music, etc.).
-- User Greeting: Display the user's name and a logout button.
-- Media List: A table or grid view showing the media with columns for name, status, type, and actions.
-- Add Media Button: To open a form to add new media items.
-- Sort Options: To sort the list by media type or status.
+=Main Dashboard
+    =Changed nearly all of this functionality to separate "media" page
+         -+ Media List: A table or grid view showing the media with columns for name, status, type, and actions.
+            =used container card view, a la previous assignment. nicer aesthetics. also included dates.
+         -+ Add Media Button: To open a form to add new media items.
+            TODO: Add form hiding and showing on button click
+         -+ Sort Options: To sort the list by media type or status.
+            =each container has its own sort options
+         -= Navigation Bar: With links to different sections (Movies, TV Shows, Music, etc.).
+            =All categories are on one page, header has links to other pages and home
+            =also have list containing all categories
+- User Greeting: Display the user's username
+-++ And a logout button.
+TODO: Add logout button functionality
+TODO: Add greeting to logged in users
 
-Add/Edit Media Form (Modal or Separate Page)
-- Media Name Field: To enter the name of the media.
-- Media Type Dropdown: To select the type (Movie, TV Show, Music).
-- Status Dropdown: To select the status (e.g., "Awaiting Download", "Downloaded", "Bad Quality").
-- Save Button: To save the new media item or changes.
-- Cancel Button: To close the form without saving.
 
-Planned Database Structure (now deprecated)
++Add/Edit Media Form
+    -+ Media Name Field: To enter the name of the media.
+        -Title
+    -+ Media Type Dropdown: To select the type (Movie, TV Show, Music).
+        -Type
+    -+ Status Dropdown: To select the status (e.g., "Awaiting Download", "Downloaded", "Bad Quality").
+        -Status
+    -+= Media Image Field: To upload an image for the media.
+        -Image
+    -+= checkStatus: A reminder to check the status of the item
+        -checkStatus
+    -+ Save Button: To save the new media item or changes.
+        -Update
+    -+ Cancel Button: To close the form without saving.
+        -Cancel
+
+Planned Database Structure (now deprecated, using Sequelize ORM instead):
 CREATE TABLE Users (
     UserID INT AUTO_INCREMENT PRIMARY KEY,
     Username VARCHAR(255) UNIQUE NOT NULL,
@@ -42,11 +61,40 @@ CREATE TABLE Media (
 );
 
 Dependencies:
-- cors
-- express
-- axios
-- dotenv
-- express-session
-- bcrypt
-- path
-- sequelize
+    -+ cors
+    -+ express
+    -+ axios
+    -+ dotenv
+    -+ express-session
+    -+ bcrypt
+    -+ path
+    -+ sequelize
+    -+ pg
+    -+ pg-hstore
+    -+ body-parser
+
+
+final todos:
+-+edit media button different text color than delete button
+-+add media form hidden by default (button in top right that says Add Media and reveals form?)
+-+Add media form hiding and showing on button click
+-+login success redirect to media instead of dashboard
+-+toast messaging for registration and login success (i.e. "registration success", "login success") + logout success
+-+add "welcome, username" message above logout button in header for logged-in users
+-+unauthorized page styling (or maybe skip this page entirely and redirect to login page, with toast error message like "you must be logged in to view this page"?)
+-+change button text/destination on landing when logged (perhaps media and dashboard instead of login and dashboard)
+-+logout button functionality (also why is logButtonCheck not correctly changing button to say "logout"? current implementation (on media page) must be incorrect)
+
+
+-style cards more (image consistency, text fill, etc.)
+-dashboard
+-profile
+
+
+co-functions:
+showToast
+checkLoginStatus
+displayUsername
+logout
+logout listener
+

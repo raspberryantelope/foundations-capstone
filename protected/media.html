@@ -14,12 +14,16 @@
                     <li><a href="/dashboard" class="header-button">Dashboard</a></li>
                     <li><a href="/profile" class="header-button">Profile</a></li>
                     <li><a href="/media" class="header-button">Media</a></li>
-                    <li><a href="/logout" class="header-button" id="log-button"></a></li>
+                    <li><a href="#" class="header-button" id="logout-button">Logout</a></li>
                 </ul>
+                <span id="header-welcome-message"></span>
             </nav>
         </header>
+        <div id ="add-media-button-container">
+            <button id="add-media-button" onclick="toggleAddMediaForm()">Add Media</button>
+        </div>
         <div id="media-container">
-            <form id="media-form">
+            <form id="media-form" style="display: none;">
                 <label for="media-title">Title</label>
                 <input type="text" id="media-title" placeholder="Title" required>
                 <label for="media-image">Image URL</label>
@@ -45,7 +49,7 @@
                 </select>
                 <label for="media-check-status">Check?</label>
                 <input type="checkbox" id="media-check-status" name="media-check-status" value="Check?">
-                <button type="submit">Add Media</button>
+                <button type="submit">Add</button>
             </form>
             <div id="all-media-container">
                 <div class ="collapsible-container">

@@ -64,19 +64,26 @@
                 padding: 0 10px;
             }
 
-            nav a.header-button {
-                text-decoration: none;
-                color: #ffead4;
-                background-color: #2f2542;
-                padding: 20px 25px;
-                border-radius: 8px;
-                transition: background-color 0.3s;
-                font-size: 2.45rem;
-            }
+                nav a.header-button {
+                    text-decoration: none;
+                    color: #ffead4;
+                    background-color: #2f2542;
+                    padding: 12px 25px;
+                    border-radius: 8px;
+                    transition: background-color 0.3s;
+                    font-size: 2.45rem;
+                }
 
                 nav a.header-button:hover {
                     background-color: #413a70;
                 }
+
+#header-welcome-message {
+    position: absolute;
+    top: .5%;
+    right: 2%;
+    font-size: 1.5rem;
+}
 
     body {
         margin: 0;
@@ -135,3 +142,22 @@
                     #landing-buttons button:hover {
                         background-color: #9d2a4e;
                     }
+
+.toast-message {
+    position: fixed;
+    bottom: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #81749b;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5%;
+    z-index: 1000;
+    font-size: 2.15rem;
+    opacity: 0;
+    transition: opacity 0.75s ease;
+}
+
+.toast-message.show {
+    opacity: 1;
+}
