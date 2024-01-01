@@ -91,10 +91,10 @@ body {
     height: 100vh;
     display: flex;
     flex-direction: column;
-    background-image: url(./logo.new.old.png);
+    background-image: url(./bglogo.png);
     background-repeat: no-repeat;
-    background-position: center;
-    background-size: auto 100%;
+    background-position: 50% 40%;
+    background-size: auto 160%;
     background-color: #322e3b;
     background-attachment: fixed;
 }
@@ -242,7 +242,6 @@ body {
     margin-bottom: 1%;
     display: block;
     box-sizing: border-box;
-    /*justify-content: center;*/
 }
 
 .collapsible-container {
@@ -306,7 +305,6 @@ body {
 }
 
 .checked-media-card {
-    /*background-color: #5c3e8d;*/
     background-color: #ffae3b;
 
 }

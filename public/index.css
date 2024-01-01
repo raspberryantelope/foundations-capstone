@@ -91,10 +91,10 @@
         height: 100vh;
         display: flex;
         flex-direction: column;
-        background-image: url(./logo.new.old.png);
+        background-image: url(./bglogo.png);
         background-repeat: no-repeat;
-        background-position: center;
-        background-size: auto 100%;
+        background-position: 50% 40%;
+        background-size: auto 160%;
         background-color: #322e3b;
     }
 
@@ -114,7 +114,6 @@
             }
 
             #landing-container img {
-                /*margin: 0 auto;*/
                 max-width: 10%;
                 height: auto;
             }

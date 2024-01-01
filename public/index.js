@@ -1,5 +1,7 @@
 let audio = document.getElementById("landing-audio")
-audio.volume = 0.01
+audio.volume = 0.05
+audio.loop = true
+audio.play()
 
 function showToast(message) {
     const toast = document.createElement("div")

@@ -4,7 +4,6 @@ const sequelize = new Sequelize(process.env.DATABASE_URL, {
     dialect: "postgres",
 })
 const users = require('../../models/user')(sequelize, Sequelize.DataTypes)
-// const users = []
 module.exports = {
     login: async (request, response) => {
         let {username, password} = request.body
