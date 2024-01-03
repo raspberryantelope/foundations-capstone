@@ -16,7 +16,7 @@ app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-    cookie: { secure: false }
+    cookie: { secure: false, httpOnly: true }
 }))
 
 app.get("/fonts/*", (request, response) => {
