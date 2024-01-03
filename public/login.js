@@ -114,7 +114,7 @@ document.getElementById("login-button").addEventListener("click", (event) => {
     const username = document.getElementById("login-username").value
     const password = document.getElementById("login-password").value
     axios
-        .post("http://localhost:4000/api/login", { username, password })
+        .post("/api/login", { username, password })
         .then(response => {
             window.location.href = "/media"
         })
@@ -135,7 +135,7 @@ document.getElementById("register-button").addEventListener("click", (event) => 
     const password = document.getElementById("register-password").value
     const confirmPassword = document.getElementById("register-confirm-password").value
 
-    axios.post("http://localhost:4000/api/register", { username, email, password, confirmPassword })
+    axios.post("/api/register", { username, email, password, confirmPassword })
     .then(response => {
         showToast("Registration Successful")
         document.getElementById("register-form").reset()
