@@ -93,7 +93,7 @@ function getMedia(mediaType, sortBy = "title", sortOrder = "asc") {
                         <div class="media-edit-form" id="edit-${mediaType}-form-${item[`${mediaType}ID`]}" style="display: none;">
                             <input type="text" id="edit-${mediaType}-title-${item[`${mediaType}ID`]}" value="${item.title}">
                             <input type="text" id="edit-${mediaType}-image-${item[`${mediaType}ID`]}" value="${item[`${mediaType}Img`]}">
-                            <select id="edit-${mediaType}-status-${item[`${mediaType}ID`]}"">
+                            <select id="edit-${mediaType}-status-${item[`${mediaType}ID`]}">
                                 <option value="Untouched">Untouched</option>
                                 <option value="Complete">Complete</option>
                                 <option value="Complete (Low Quality)">Complete (Low Quality)</option>

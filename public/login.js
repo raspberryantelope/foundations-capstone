@@ -111,7 +111,7 @@ registerPassword.onkeyup = function () {
 document.getElementById("login-button").addEventListener("click", (event) => {
     event.preventDefault()
     const errorMessage = document.getElementById("login-error-message")
-    const username = document.getElementById("login-username").value
+    const username = document.getElementById("login-username").value.toLowerCase()
     const password = document.getElementById("login-password").value
     axios
         .post("/api/login", { username, password })
@@ -130,7 +130,7 @@ document.getElementById("login-button").addEventListener("click", (event) => {
 document.getElementById("register-button").addEventListener("click", (event) => {
     event.preventDefault()
     const errorMessage = document.getElementById("register-error-message")
-    const username = document.getElementById("register-username").value
+    const username = document.getElementById("register-username").value.toLowerCase()
     const email = document.getElementById("register-email").value
     const password = document.getElementById("register-password").value
     const confirmPassword = document.getElementById("register-confirm-password").value

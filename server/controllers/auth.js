@@ -7,6 +7,7 @@ const users = require('../../models/user')(sequelize, Sequelize.DataTypes)
 module.exports = {
     login: async (request, response) => {
         let {username, password} = request.body
+        username = username.toLowerCase()
         try {
             let user = await users.findOne({where: {username: username}})
             if (!user) {
@@ -29,6 +30,7 @@ module.exports = {
 
     register: async (request, response) => {
         let {username, email, password, confirmPassword} = request.body
+        username = username.toLowerCase()
         try {
             let existingUser = await users.findOne({
                 where: {

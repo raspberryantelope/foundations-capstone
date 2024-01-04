@@ -11,13 +11,11 @@ const Audiobooks = require('../../models/audiobook')(sequelize, Sequelize.DataTy
 const Other = require('../../models/other')(sequelize, Sequelize.DataTypes)
 
 sequelize
-    .sync({ force: true })
+    .sync()
     .then(async () => {
-    console.log('Tables created')
-    await seedDatabase()
-    console.log('Database seeded')
+    console.log('Tables created/checked')
     })
-    .catch(error => console.error('Error creating tables', error))
+    .catch(error => console.error('Error creating/checking tables', error))
 
 async function seedDatabase() {
     await Users.create({
